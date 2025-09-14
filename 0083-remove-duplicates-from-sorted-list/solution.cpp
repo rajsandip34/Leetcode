@@ -17,12 +17,12 @@ public:
             bool flag =true; //flag condition
             // inner loop to check the next element till the next node is not same;
             while( temp->next!=NULL && temp->val==temp->next->val){
-                
                 temp->next=temp->next->next;
-                
-            
             }
             temp=temp->next;
+                
+                
+            
         }
         return head;
     }

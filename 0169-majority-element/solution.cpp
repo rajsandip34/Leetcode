@@ -4,7 +4,7 @@ public:
         sort(nums.begin(),nums.end());
         int n=nums.size();
         if(n==1) return nums[0];
-        else return nums[n/2];
+        return nums[n/2];
         
     }
 };

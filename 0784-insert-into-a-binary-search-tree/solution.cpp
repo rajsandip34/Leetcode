@@ -12,24 +12,24 @@
 class Solution {
 public:
     void helper(TreeNode* root,int val){
-        if(root->left==NULL && root->val>val){
-            root->left=new TreeNode(val); 
-            return;
-        }else if(root->right==NULL && root->val<val){
-            root->right=new TreeNode(val);
-            return;
+        
+        if(root->val<val){
+            if(root->right!=NULL) helper(root->right,val);
+            else if(root->right==NULL){
+                root->right=new TreeNode(val);
+                return;
+            }
+        }else if(root->val>val){
+            if(root->left!=NULL) helper(root->left,val);
+            else if(root->left==NULL){
+                 root->left = new TreeNode(val);
+                return;
+            }
         }
-        if(root->val<val) helper(root->right,val);
-        else helper(root->left,val);
     }
     TreeNode* insertIntoBST(TreeNode* root, int val) {
         if(root==NULL) return new TreeNode(val);
-            
-      
         helper(root,val);
         return root;
     }
 };
-        
-           
-            

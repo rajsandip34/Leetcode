@@ -1,22 +1,20 @@
 class Solution {
 public:
-    void parenth(vector<string> &ans,int n,string str,int open,int close){
-        if(str.length()==2*n){
-            ans.push_back(str);
+    vector<string> ans;
+    
+    void f(int n,string s,int open,int close){
+        if(open<0) return ;
+        if(s.size()==2*n){
+            ans.push_back(s);
+            return;
         }
-
+        if(open<n) f(n,s+"(",open+1,close);
+        if(close<open)f(n,s+")",open,close+1);
             
-        if(open<n){
-            parenth(ans,n,str+'(',open+1,close);
-        }
-        if(close<open){
-            parenth(ans,n,str+')',open,close+1);
-        }
     }
     vector<string> generateParenthesis(int n) {
-        vector<string> ans ;
-        vector<int> v;
-        parenth(ans,n,"",0,0);
+        f(n,"",0,0);
         return ans;
+
     }
 };

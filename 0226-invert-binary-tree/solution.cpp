@@ -11,18 +11,15 @@
  */
 class Solution {
 public:
-    void helper(TreeNode* &root){
-        if(root==NULL) return;
-        swap(root->left,root->right);
-        helper(root->left);
-        helper(root->right);
-    }
     TreeNode* invertTree(TreeNode* root) {
-        TreeNode* a = root;
-        helper(a);
+        //at each level go and swap the left and right subtree
+        if(root==NULL) return root;
+        TreeNode* s=root->left;
+        root->left=root->right;
+        root->right=s;
+        
+        invertTree(root->left);
+        invertTree(root->right);
         return root;
-        
-        
-        
     }
 };

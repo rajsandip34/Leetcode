@@ -1,24 +1,18 @@
 class Solution {
 public:
-    vector<int> vis;
-    int f(int i,vector<int>& nums){
+    vector<int> dp;
+    int f(int i,vector<int> &nums){
+        
         if(i>=nums.size()) return 0;
-        if(i==nums.size()-1) return nums[nums.size()-1];
-        //take and not take particular index
-        //take i
-        int take,Dtake; 
-        if(vis[i]!=-1) return vis[i];
-        
-        take = nums[i]+f(i+2,nums);
-        Dtake = f(i+1,nums);
-      
+        if(dp[i]!=-1) return dp[i];
+        int take = nums[i]+f(i+2,nums);
         
         
-
-        return vis[i]=max(take,Dtake);
+        int dTake = f(i+1, nums);
+        return dp[i]=max(take,dTake);
     }
     int rob(vector<int>& nums) {
-        vis.resize(nums.size(),-1);
+        dp.resize(105,-1);
         return f(0,nums);
     }
 };

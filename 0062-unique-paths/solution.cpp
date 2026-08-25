@@ -1,17 +1,14 @@
 class Solution {
 public:
-    long long ncr(int n,int r){
-        long long ncr =1;
-        for(int i=1;i<=r;i++){
-            ncr=ncr*(n-i+1)/i;
-
-        }
-        return ncr;
+    vector<vector<int>> dp;
+    int f(int m,int n){
+        if(m==0 && n==0) return 1;
+        if(m<0 || n<0) return 0;
+        if(dp[m][n]!=-1) return dp[m][n];
+        return dp[m][n]=f(m-1,n) +f(m,n-1);
     }
-
     int uniquePaths(int m, int n) {
-        m--;
-        n--;
-        return ncr((m+n),min(m,n));
+        dp.assign(m,vector<int> (n,-1));
+        return f(m-1,n-1);
     }
 };

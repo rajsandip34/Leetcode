@@ -1,37 +1,29 @@
 class Solution {
 public:
-
-    string countAndSay(int n) {
-        if(n==1) return "1";
-        string str = countAndSay(n-1);
-        string s;
-        
-        
-        s="";
-        int j=0;
-        int freq=1;
-        int i=1;
-        while(i<str.length()){
-            if(str[j]==str[i] ) {
-                freq++;
-                    
-                    
+    string ans="1";
+    int n1;
+    void f(int z){
+        if(z==n1) return;
+        string a=ans;
+        ans="";
+        int i=0;
+        while(i<a.length()){
+            int j=i;
+            
+            while((i+1<a.length()) && a[i]==a[i+1]){
+                i++;
+                
             }
-            else{
-                 
-                s+=to_string(freq)+str[j];
-                freq=1;
-                j=i;
-            }   
-            i++;   
+            int freq = i-j+1;
+            //freq is i-j+1
+            ans+= to_string(freq)+a[j];
+            i++;
         }
-        //in our logic we don't add last element so taht it flop
-        //adding below is fix that;
-        s += to_string(freq) + str[j];
-        
-
-        return s;
-
-        
+        f(z+1);
+    }
+    string countAndSay(int n) {
+        n1=n;
+        f(1);
+        return ans;
     }
 };
